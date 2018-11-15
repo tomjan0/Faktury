@@ -17,19 +17,21 @@ public class UI {
         Customer c2 = new Customer("1111000010", "Warzywniak", "Pereca 22", "123456789");
         Database.customers.add(c2);
 
-        Scanner scan = new Scanner(System.in);
+        GUI.main(null);
 
-        String akcja = "";
-
-        while (!(akcja.equals("exit"))){
-            System.out.println("Wybierz akcję: \n" +
-                    "1 - dodaj klienta");
-            akcja = scan.nextLine();
-            if(akcja.equals("1")){
-                System.out.println("Podaj dane:");
-            }
-            System.out.println(akcja + "/");
-        }
+//        Scanner scan = new Scanner(System.in);
+//
+//        String akcja = "";
+//
+//        while (!(akcja.equals("exit"))){
+//            System.out.println("Wybierz akcję: \n" +
+//                    "1 - dodaj klienta");
+//            akcja = scan.nextLine();
+//            if(akcja.equals("1")){
+//                System.out.println("Podaj dane:");
+//            }
+//            System.out.println(akcja + "/");
+//        }
 
 //        c1.createInvoice();
 //        c1.createInvoice();
