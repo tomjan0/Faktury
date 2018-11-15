@@ -6,7 +6,7 @@ public class CustomerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void nipExceptionCheck() {
-        new Customer("1111", "ex", "ex", "123456789");
+        new Customer("123456789a", "ex", "ex", "123456789");
     }
 
     @Test(expected = IllegalArgumentException.class)
