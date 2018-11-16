@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -98,11 +99,54 @@ public class GUI extends Application {
         GridPane customer_center = new GridPane();
         customer_center.setStyle("-fx-background-color: #9a2533");
         Label add_customer_title = new Label("Wprowadź dane");
-        add_customer_title.setStyle("-fx-min-width: 250;-fx-min-height: 50;-fx-max-height: 50;-fx-font-weight: 500;" +
-                "-fx-font-size: 20;-fx-text-fill: #ffffff;-fx-background-color: transparent;-fx-alignment: Center;" +
-                "-fx-background-color: #ac383d");
+        add_customer_title.setStyle(Styles.menu_button +
+                "-fx-background-color: #ac383d;");
         customer_center.add(cusBack,0,0);
         customer_center.add(add_customer_title,0,1);
+        Label dump = new Label(" ");
+        dump.setStyle(Styles.menu_button);
+        customer_center.add(dump,0,2);
+        //customer_center.setVgap(10);
+
+        Label nip_label = new Label("NIP");
+        Label name_label = new Label("Nazwa");
+        Label address_label = new Label("Adres");
+        Label phone_label = new Label("Telefon");
+
+        TextField nip_tf = new TextField();
+        TextField name_tf = new TextField();
+        TextField address_tf = new TextField();
+        TextField phone_tf = new TextField();
+
+        customer_center.add(nip_label, 0,3);
+        customer_center.add(name_label,0,4);
+        customer_center.add(address_label,0,5);
+        customer_center.add(phone_label,0,6);
+
+        customer_center.add(nip_tf,1,3);
+        customer_center.add(name_tf,1,4);
+        customer_center.add(address_tf,1,5);
+        customer_center.add(phone_tf,1,6);
+
+        nip_label.setStyle(Styles.menu_button);
+        name_label.setStyle(Styles.menu_button);
+        address_label.setStyle(Styles.menu_button);
+        phone_label.setStyle(Styles.menu_button);
+
+        nip_tf.setStyle(Styles.text_field);
+        name_tf.setStyle(Styles.text_field);
+        address_tf.setStyle(Styles.text_field);
+        phone_tf.setStyle(Styles.text_field);
+
+        Button add_customer = new Button("Dodaj");
+        add_customer.setStyle(Styles.menu_long_button);
+        Styles.set_Hover_Style2(add_customer);
+        customer_center.add(add_customer,0,7,3,1);
+
+        TextField error_tf = new TextField();
+        error_tf.setEditable(false);
+        error_tf.setStyle(Styles.menu_button+"-fx-text-fill: #ff0000");
+        customer_center.add(error_tf,0,8,4,1);
 
         //---ROOT BORDER PANE---
         BorderPane root = new BorderPane();
@@ -129,6 +173,25 @@ public class GUI extends Application {
         });
         cusBack.setOnMouseClicked(event -> {
             root.setCenter(null);
+        });
+        add_customer.setOnMouseClicked(event -> {
+            try {
+                Database.customers.add(new Customer(nip_tf.getText(), name_tf.getText(), address_tf.getText(), phone_tf.getText()));
+
+                Button temp = new Button(name_tf.getText());
+                temp.setStyle(Styles.menu_button);
+                Styles.set_Hover_Style(temp);
+                buttonList.add(temp);
+
+                choose_cust_menu.getChildren().addAll(temp);
+                nip_tf.setText("");
+                name_tf.setText("");
+                address_tf.setText("");
+                phone_tf.setText("");
+            }
+            catch (IllegalArgumentException ex){
+                error_tf.setText(ex.getMessage());
+            }
         });
 
         //---CREATE MAIN SCENE AND MANAGE STAGE---
