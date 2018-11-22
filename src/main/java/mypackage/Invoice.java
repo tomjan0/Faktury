@@ -13,6 +13,12 @@ public class Invoice {
         this.number = customer.getNip() + "/" + size;
     }
 
+    public Invoice(Customer customer, int size, ArrayList<Entry> entryList) {
+        this.customer = customer;
+        this.entryList = entryList;
+        this.number = customer.getNip() + "/" + size;
+    }
+
     public ArrayList<Entry> getEntryList() {
         return entryList;
     }
@@ -31,5 +37,19 @@ public class Invoice {
             System.out.println(ent.getArticle().getName() + " || " + ent.getQuantity() + " || " + ent.getArticle().getPrice() + " || " + ent.getValue());
         }
         System.out.println();
+    }
+
+    public String toString(){
+        String result = "----FAKTURA nr " + number + "----\n";
+        result = result + "[nazwa || ilość || cena || wartość]\n";
+        for (Entry ent : entryList) {
+            result = result + ent.getArticle().getName() + " || " + ent.getQuantity() + " || " + ent.getArticle().getPrice() + " || " + ent.getValue() + "\n";
+        }
+        result = result + "\n";
+        return  result;
+    }
+
+    public String getNumber() {
+        return number;
     }
 }

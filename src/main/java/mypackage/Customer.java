@@ -10,6 +10,11 @@ public class Customer {
     private final ArrayList<Invoice> invoiceList = new ArrayList<>();
 
     public Customer(String nip, String name, String address, String phone) {
+        for (Customer cust : Database.customers){
+            if(cust.nip == nip){
+                throw new IllegalArgumentException("Klient o podanym nipie już istnieje");
+            }
+        }
         if(nip.isEmpty() || name.isEmpty() || address.isEmpty() || phone.isEmpty()){
             throw new IllegalArgumentException("Argument nie może być pusty!");
         }
@@ -33,6 +38,14 @@ public class Customer {
         return name;
     }
 
+    public ArrayList<Invoice> getInvoiceList() {
+        return invoiceList;
+    }
+
+    public Invoice getLatestInvoice(){
+        return invoiceList.get(invoiceList.size()-1);
+    }
+
     public String getAddress() {
         return address;
     }
@@ -45,12 +58,16 @@ public class Customer {
         invoiceList.add(new Invoice(this, invoiceList.size()));
         Database.invoices.add(invoiceList.get(invoiceList.size()-1));
     }
+    public void createInvoice(ArrayList<Entry> entryList){
+        invoiceList.add(new Invoice(this, invoiceList.size(), entryList));
+        Database.invoices.add(invoiceList.get(invoiceList.size()-1));
+    }
 
-    public Invoice getInvoice(int id){
-        if(id < 0 || id >= invoiceList.size()) {
-            throw new IllegalArgumentException("Fakturta o podanym id nie istnieje");
+    public Invoice getInvoice(int invIndex){
+        if(invIndex < 0 || invIndex >= invoiceList.size()) {
+            throw new IllegalArgumentException("Fakturta o podanym invIndex nie istnieje");
         }
-        return invoiceList.get(id);
+        return invoiceList.get(invIndex);
     }
 
     public void showCustomerData(){
@@ -62,9 +79,9 @@ public class Customer {
         System.out.println();
     }
 
-    public void showInvoice(int id){
+    public void showInvoice(int invIndex){
         showCustomerData();
-        getInvoice(id).show();
+        getInvoice(invIndex).show();
         System.out.println("==========================================\n\n");
     }
 

@@ -8,7 +8,7 @@ public class Entry {
     public Entry(Article article, double quantity) {
         this.article = article;
         this.quantity = quantity;
-        this.value = quantity*article.getPrice();
+        this.value = Math.floor(quantity*article.getPrice()*100)/100;
     }
 
     public Article getArticle() {

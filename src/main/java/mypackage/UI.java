@@ -12,12 +12,11 @@ public class UI {
         Database.articles.add(new Article(3,"krzesło", 35.69));
         Database.articles.add(new Article(4, "biurko", 140));
 
-        Customer c1 = new Customer("8182842141", "Google", "Marcepankowa 23/1", "533000111");
-        Database.customers.add(c1);
-        Customer c2 = new Customer("1111000010", "Warzywniak", "Pereca 22", "123456789");
-        Database.customers.add(c2);
+        Customer cust1 = new Customer("8182842141", "Google", "Marcepankowa 23/1", "533000111");
+        Database.customers.add(cust1);
+        Customer cust2 = new Customer("1111000010", "Warzywniak", "Pereca 22", "123456789");
+        Database.customers.add(cust2);
 
-        GUI.main(null);
 
 //        Scanner scan = new Scanner(System.in);
 //
@@ -33,28 +32,43 @@ public class UI {
 //            System.out.println(akcja + "/");
 //        }
 
-//        c1.createInvoice();
-//        c1.createInvoice();
-//        c1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+        cust1.createInvoice();
+
+
+        cust1.getInvoice(0).addEntry(Database.articles.get(0), 10);
+        cust1.getInvoice(0).addEntry(Database.articles.get(1), 32);
+        cust1.getInvoice(1).addEntry(Database.articles.get(2), 10);
+        cust1.getInvoice(2).addEntry(Database.articles.get(4),7);
+
+
+        cust2.createInvoice();
+        cust2.createInvoice();
+
+        cust2.getInvoice(0).addEntry(Database.articles.get(3),321);
+        cust2.getInvoice(1).addEntry(Database.articles.get(2), 12);
+
 //
-//        c1.getInvoice(0).addEntry(Database.articles.get(0), 10);
-//        c1.getInvoice(0).addEntry(Database.articles.get(1), 32);
-//        c1.getInvoice(1).addEntry(Database.articles.get(2), 10);
-//        c1.getInvoice(2).addEntry(Database.articles.get(4),7);
-//
-//        c2.createInvoice();
-//        c2.createInvoice();
-//
-//        c2.getInvoice(0).addEntry(Database.articles.get(3),321);
-//        c2.getInvoice(1).addEntry(Database.articles.get(2), 12);
-//
-////        c1.showInvoice(0);
-//        c1.showAll();
-//        c2.showAll();
+////        cust1.showInvoice(0);
+//        cust1.showAll();
+//        cust2.showAll();
 //
 ////        Database.showArticles();
 //        Database.showCustomers();
 ////        Database.showInovices();
+        GUI.main(null);
 
     }
 }
